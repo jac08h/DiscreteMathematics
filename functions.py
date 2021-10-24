@@ -49,5 +49,13 @@ def create_pair_congruency_to_solve(cong: Congruency) -> Congruency:
     return cong[2], 0, cong[2]
 
 
+def gcd(a: int, b: int) -> int:
+    if a < b:
+        a, b = b, a
+    while b > 0:
+        a, b = b, a % b
+    return a
+
+
 if __name__ == '__main__':
     pass
