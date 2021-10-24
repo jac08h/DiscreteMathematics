@@ -1,3 +1,4 @@
+from math import sqrt
 from typing import Tuple, List, Optional
 
 # Prime, power.
@@ -55,6 +56,15 @@ def gcd(a: int, b: int) -> int:
     while b > 0:
         a, b = b, a % b
     return a
+
+
+def is_prime(n: int) -> bool:
+    i = 2
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 1
+    return True
 
 
 if __name__ == '__main__':

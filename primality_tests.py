@@ -4,6 +4,8 @@ from functions import gcd
 
 
 def fermat_primality_test(p: int) -> bool:
+    if p == 2:
+        return True
     tried = set()
     for _ in range(3):
         a = randint(2, p - 1)
@@ -19,6 +21,8 @@ def fermat_primality_test(p: int) -> bool:
 
 
 def euler_primality_test(p: int) -> bool:
+    if p == 2:
+        return True
     # Use two bases, 2 and 3.
     # First pseudoprime for both bases: 1729
     for a in [2, 3]:

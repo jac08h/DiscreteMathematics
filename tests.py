@@ -1,4 +1,5 @@
-from functions import eulers_totient, prime_factors, solve_congruency_system, gcd
+from functions import eulers_totient, prime_factors, solve_congruency_system, gcd, is_prime
+from jacobi_symbol import jacobi_symbol
 from primality_tests import fermat_primality_test, euler_primality_test
 from rsa import RSA
 
@@ -42,23 +43,33 @@ def test_gcd():
     assert gcd(gcd(203, 91), 77) == 7
 
 
-def test_primality_tests() -> None:
+def test_is_prime():
     # From https://oeis.org/A000040
     primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59,
               61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127,
               131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191,
               193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257,
               263, 269, 271}
-    for i in range(3, 272):
-        if fermat_primality_test(i):
+    for i in range(2, max(primes) + 1):
+        if is_prime(i):
             assert i in primes
         else:
             assert i not in primes
 
-        if euler_primality_test(i):
-            assert i in primes
-        else:
-            assert i not in primes
+
+def test_primality_tests() -> None:
+    for i in range(2, 300):
+        assert fermat_primality_test(i) == is_prime(i)
+        assert euler_primality_test(i) == is_prime(i)
+
+
+def test_jacobi_symbol() -> None:
+    positive = [(2597, 3739), (1255, 2313)]
+    negative = [(1109, 2461), (377, 1719)]
+    for a, b in positive:
+        assert jacobi_symbol(a, b) == 1
+    for a, b in negative:
+        assert jacobi_symbol(a, b) == -1
 
 
 if __name__ == '__main__':
