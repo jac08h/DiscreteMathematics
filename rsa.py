@@ -29,8 +29,5 @@ class RSA:
         return msg ** self.e % self.n
 
 
-
-
-
 if __name__ == '__main__':
     pass
